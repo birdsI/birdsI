@@ -1,255 +1,31 @@
+/* Navbar overwriting for holding image */
 
 body {
-  background-color: #f2f2f2;
-    font-family: "Lato", sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    color: #555;
-    padding-top: 50px;
-
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch;
+    margin-top: 90px;
 }
 
-/* Titles */
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Raleway";
-    font-weight: 300;
-    color: #333;
+.navbar-brand img{
+    height: 80px;
+}
+
+.navbar-inverse {
+    background-color: #000;
+}
+
+.navbar-nav {
+    margin-top: 25px;
 }
 
 
-/* Paragraph & Typographic */
-p {
-    line-height: 28px;
-    margin-bottom: 25px;
-}
+/* Button overrides to match branding */
 
-.centered {
-    text-align: center;
-}
-
-/* Links */
-a {
-    color: #000058;
-    word-wrap: break-word;
-
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
-}
-
-a:hover,
-a:focus {
-    color: #5899df;
-    text-decoration: none;
-    outline: 0;
-}
-
-a:before,
-a:after {
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
-}
-
-hr {
+.btn-huge {
+    font-size: 24px;
+    padding: 20px;
     display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
+    margin: 0 auto;
 }
 
-
-/* ==========================================================================
-   Wrap Sections
-   ========================================================================== */
-
-#headerwrap {
-  background: url("../images/bg.jpg");
-  padding-top: 60px;
-  background-size:     cover;
-  background-repeat:   no-repeat;
-  background-position: top right;
+.btn-primary {
+    background-color: #429dd6;
 }
-
-#headerwrap h1 {
-	margin-top: 30px;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-	color: white;
-	font-size: 70px;
-
-}
-
-#headerwrap h3 {
-	color: white;
-	font-size: 30px;
-}
-
-#headerwrap h5 {
-	color: white;
-	font-weight: 700;
-	text-align: left;
-}
-
-#headerwrap p {
-	text-align: left;
-	color: white
-}
-#headerwrap center{
-    color:white;
-}
-
-#headerindex{
-    background: url("../images/bg.jpg");
-    padding-top: 60px;
-    background-size:     cover;
-    background-repeat:   no-repeat;
-    background-position: top right;
-}
-#headerindex h1 {
-    margin-top: 30px;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    color: white;
-    font-size: 70px;
-
-}
-
-
-
-/* intro Wrap */
-
-#intro {
-	padding-top: 30px;
-	border-top: #bdc3c7 solid 5px;
-}
-
-/*#intro p{
-    color: black;
-}*/
-
-#features {
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
-
-#features .ac a{
-	font-size: 20px;
-}
-
-/* Showcase Wrap */
-
-#showcase {
-	display: block;
-	background-color: #7B3F00; /*Blue Color*/
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
-
-#showcase h1 {
-	color: white;
-}
-
-#footerwrap {
-	background-color: #2f2f2f;
-	color: white;
-	padding-top: 40px;
-	padding-bottom: 60px;
-	text-align: left;
-}
-
-#footerwrap h3 {
-	font-size: 28px;
-	color: white;
-}
-
-#footerwrap p {
-	color: white;
-	font-size: 18px;
-}
-
-/* Copyright Wrap */
-
-#c {
-	background: #222222;
-	padding-top: 15px;
-	text-align: right;
-}
-
-#c p {
-	color: white
-}
-
-
-/*NEW THINGS=====================================
-=================================================*/
-/*#scroller{
-    position: center;
-    padding-right: center;
-    padding-left: center;
-    padding-top: none;
-}
-*/
-
-
-
-li.culogo{
-    position: top;
-    margin-top: -11px;
-    height: 50px;
-    border: none;
-
-}
-
-#arrow{
-    padding-left: 150px;
-    padding-right: auto;
-    padding-top: 150px;
-}
-
-#centertext{
-    position:center;
-}
-
-img.centered {
-    display: block;
-    margin-left: auto;
-    margin-right: auto }
-
-#lefttext{
-    float:left
-}
-
-
-#bottompage {
-    display: inline-block;
-    /*background-color: #ffffff; /*Blue Color*/
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-right: 100px;
-}
-
-#intro .displaycenter{
-    display: block;
-    margin-left: auto;
-    margin-right: auto
-}
-
-
-/*.col-lg-7{
-    background-color: #ffffff;
-    border-width:10px;
-    border-color:black;
-}
-
-.col-lg-7 h3{
-    color:black;
-}*/
-
-/*Carto DB Thing*/
