@@ -1,0 +1,31 @@
+/* Navbar overwriting for holding image */
+
+body {
+    margin-top: 90px;
+}
+
+.navbar-brand img{
+    height: 80px;
+}
+
+.navbar-inverse {
+    background-color: #000;
+}
+
+.navbar-nav {
+    margin-top: 25px;
+}
+
+
+/* Button overrides to match branding */
+
+.btn-huge {
+    font-size: 24px;
+    padding: 20px;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-primary {
+    background-color: #429dd6;
+}

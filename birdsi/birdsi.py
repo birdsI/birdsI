@@ -1,6 +1,7 @@
 from flask import Flask, session, redirect, request, url_for, \
 	render_template, g
 import auth
+from APIinterface import getQuery
 
 
 app = Flask(__name__)
@@ -15,11 +16,11 @@ app.config.update(dict(
 	PASSWORD='default'
 ))
 
-### Routing ### 
-@app.route('/')
+### Routing ###
+@app.route('/', methods = ['GET', 'POST'])
 def index():
 	if session.get('id'):
-		return 'Logged in, dashboard here'
+		return app.send_static_file('dashboard.html')
 
 	return redirect(url_for('login'))
 
@@ -66,13 +67,17 @@ def register():
 	# User is visiting the registration page, and has not submitted
 	return render_template('register.html', error = error)
 
-		
+
 @app.route('/logout')
 def logout():
 	session.pop('id', None)
 	return redirect(url_for('login'))
 
-
+@app.route('/postmethod', methods = ['POST'])
+def get_post_javascript_data():
+	jsdata = request.form['javascript_data']
+	jsdata = getQuery(jsdata)
+	return jsdata
 
 if __name__ == '__main__':
 	app.run()
