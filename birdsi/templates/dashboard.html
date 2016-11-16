@@ -1,134 +1,65 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% extends "layout.html" %}
 
-    <title>BirdsI</title>
-
-    <!-- Bootstrap core CSS -->
-   <link href="../static/css/bootstrap.css" rel="stylesheet">
-   <link href="../static/css/main.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img src="../static/images/birdsiheader.png"></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="">Login</a></li>
-            <li><a href="">Register</a></li>
-          </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-      <div class="row">
-        <div class="page-header">
-          <h1>Keyword: <span class="keyword">Touch bar</span></h1>
-        </div>
-      </div>
-      <div class="row">
-          <div class="col-md-6">
-            <div style="height: 500px;" id="chart_div"></div>
-          </div>
-          <div class="col-md-6">
-            <div id="curve_chart" style="height: 500px"></div>
-          </div>
-        </div>
-      </div>
+{% block body %}
+  <div class="row">
+    <div class="page-header">
+      <h1>Keyword: <span class="keyword">Touch bar</span></h1>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div style="height: 500px;" id="chart_div"></div>
+    </div>
+    <div class="col-md-6">
+      <div id="curve_chart" style="height: 500px"></div>
+    </div>
+  </div>
 
-    <div class="container">
-      
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+          ['Age', 'Weight'],
+          [ 8,      12],
+          [ 4,      5.5],
+          [ 11,     14],
+          [ 4,      5],
+          [ 3,      3.5],
+          [ 6.5,    7]
+          ]);
 
-<!--
-      <hr>
--->
-      <footer>
-        <p>© 2016 BirdsI</p>
-      </footer>
-    </div> <!-- /container -->
-  
+      var options = {
+        title: 'Time vs. Tweets comparison',
+        hAxis: {title: 'Time', minValue: 0, maxValue: 15},
+        vAxis: {title: 'Tweets', minValue: 0, maxValue: 15},
+        legend: 'none'
+      };
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../static/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
-     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-          <script type="text/javascript">
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
-              var data = google.visualization.arrayToDataTable([
-              ['Age', 'Weight'],
-              [ 8,      12],
-              [ 4,      5.5],
-              [ 11,     14],
-              [ 4,      5],
-              [ 3,      3.5],
-              [ 6.5,    7]
-              ]);
+      var data2 = google.visualization.arrayToDataTable([
+            ['Time', 'Positives', 'Negatives'],
+            ['6',  1000,      400],
+            ['12',  1170,      460],
+            ['18',  660,       1120],
+            ['24',  1030,      540]
+          ]);
 
-          var options = {
-            title: 'Time vs. Tweets comparison',
-            hAxis: {title: 'Time', minValue: 0, maxValue: 15},
+          var options2 = {
+            title: 'Positive vs. Negative Tweets',
+            curveType: 'function',
+            hAxis: {title: 'Time (Hours)', minValue: 0, maxValue: 15},
             vAxis: {title: 'Tweets', minValue: 0, maxValue: 15},
-            legend: 'none'
+            legend: { position: 'bottom' }
           };
 
-          var data2 = google.visualization.arrayToDataTable([
-                ['Time', 'Positives', 'Negatives'],
-                ['6',  1000,      400],
-                ['12',  1170,      460],
-                ['18',  660,       1120],
-                ['24',  1030,      540]
-              ]);
+          var chart2 = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-              var options2 = {
-                title: 'Positive vs. Negative Tweets',
-                curveType: 'function',
-                hAxis: {title: 'Time (Hours)', minValue: 0, maxValue: 15},
-                vAxis: {title: 'Tweets', minValue: 0, maxValue: 15},
-                legend: { position: 'bottom' }
-              };
+          chart2.draw(data2, options2);
 
-              var chart2 = new google.visualization.LineChart(document.getElementById('curve_chart'));
+      var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
 
-              chart2.draw(data2, options2);
-
-          var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-
-          chart.draw(data, options);
-        }
-          </script>
-  
-
-</body>
-</html>
+      chart.draw(data, options);
+    }
+  </script>
+{% endblock %}
