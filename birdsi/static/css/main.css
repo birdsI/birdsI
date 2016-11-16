@@ -29,3 +29,7 @@ body {
 .btn-primary {
     background-color: #429dd6;
 }
+
+.keyword {
+    font-weight: normal;
+}
