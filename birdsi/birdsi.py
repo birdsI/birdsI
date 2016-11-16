@@ -17,10 +17,17 @@ app.config.update(dict(
 ))
 
 ### Routing ###
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/')
 def index():
 	if session.get('id'):
-		return app.send_static_file('dashboard.html')
+		return redirect(url_for('dashboard'))
+
+	return render_template('index.html')
+
+@app.route('/dashboard', methods = ['GET', 'POST'])
+def dashboard():
+	if session.get('id'):
+		return render_template('dashboard.html')
 
 	return redirect(url_for('login'))
 
@@ -35,7 +42,7 @@ def login():
 		if user:
 			# first element in tuple is id
 			session['id'] = user[0]
-			return redirect(url_for('index'))
+			return redirect(url_for('dashboard'))
 		# Authentication Failed
 		error = "Invalid email or password"
 		return render_template('login.html', error = error)
@@ -71,7 +78,7 @@ def register():
 @app.route('/logout')
 def logout():
 	session.pop('id', None)
-	return redirect(url_for('login'))
+	return redirect(url_for('index'))
 
 @app.route('/postmethod', methods = ['POST'])
 def get_post_javascript_data():

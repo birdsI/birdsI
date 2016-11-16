@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="row">
+    <div class="page-header">
+      <label> Keyword: <input type="text" id="query" value="Touch Bar"><button onclick="getQuery()"> Submit Query </button></label> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div style="height: 500px;" id="chart_div"></div>
+    </div>
+    <div class="col-md-6">
+      <div style="height: 500px;" id="pos_neg"></div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function getScatterData() {
+      scatterData = [['Age', 'Weight']];
+      // Get random data for now
+      for (var i = 1; i<16; i+=2) {
+        randomWeight = Math.round((Math.random() * 15));
+        randomEntry = [i, randomWeight];
+        scatterData[(i+1)/2] = randomEntry;
+      }
+
+      return scatterData;
+    }
+
+    function getQuery() {
+      var q = document.getElementById("query").value
+      $.post( "/postmethod", {
+        javascript_data: q
+      }, drawChart, "json");
+    }
+
+    function drawChart(posNegData) {
+      var scatterData = google.visualization.arrayToDataTable(getScatterData());
+      var scatterOptions = {
+        title: 'Time vs. Tweets comparison',
+        hAxis: {title: 'Time', minValue: 0, maxValue: 15},
+        vAxis: {title: 'Tweets', minValue: 0, maxValue: 15},
+        legend: 'none'
+      };
+      var posConf;
+      var neutConf;
+      var negConf;
+      if (posNegData === null || posNegData === undefined) {
+        posConf = 250.4;
+        neutConf = 98.7;
+        negConf = 25;
+      }
+      else {
+        posConf = posNegData[0];
+        neutConf = posNegData[1];
+        negConf = posNegData[2];
+      }
+
+      
+      var posData = google.visualization.arrayToDataTable([
+        ['Sentiment', 'Confidence'],
+        ['Positive', posConf ],
+        ['Negative', negConf ],
+        ['Neutral', neutConf ]
+      ]);
+      var pieOptions = {
+        title: 'Impression of tweets',
+        pieHole: 0.4
+      };
+
+      var scatterChart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+      scatterChart.draw(scatterData, scatterOptions);
+
+      var pieChart = new google.visualization.PieChart(document.getElementById('pos_neg'));
+      pieChart.draw(posData, pieOptions)
+    }
+      
+      
+</script>
+{% endblock %}
