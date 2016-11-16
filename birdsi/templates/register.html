@@ -1,37 +1,35 @@
-<!DOCTYPE html>
-<html>
-    
-<head>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
-</head>
-<body>
-    
-<div class="imgcontainer">
-  <img src="{{ url_for('static', filename='BirdsILogo.png') }}" alt="BirdsILogo" class="avatar">
-</div>
+{% extends "layout.html" %}
+
+{% block body %}
 <h1>Register for BirdsI</h1>
 <form action="{{ url_for('register') }}" method="post">
 
-{% if error %}<p>{{ error }}</p> {% endif %}
-  <div class="container">
+{% if error %}<p class="text-danger">{{ error }}</p> {% endif %}
+  <div class="form-group">
     <label><b>User Name/Company Name:</b></label>
-    <input type="text" placeholder="Enter User Name/Company Name" name="username" required>
+    <input type="text" placeholder="Enter User Name/Company Name" name="username" required class="form-control">
+  </div>
+  <div class="form-group">
     <label><b>Email:</b></label>
-    <input type="email" placeholder="Enter email" name="email" required>
+    <input type="email" placeholder="Enter email" name="email" required class="form-control">
+  </div>
+  <div class="form-group">
     <label><b>Repeat Email:</b></label>
-    <input type="email" placeholder="Repeat email" name="email_repeat" required>
-
+    <input type="email" placeholder="Repeat email" name="email_repeat" required class="form-control">
+  </div>
+  <div class="form-group">
     <label><b>Password:</b></label>
-    <input type="password" placeholder="Enter password" name="password" required>
+    <input type="password" placeholder="Enter password" name="password" required class="form-control">
+  </div>
+  <div class="form-group">
     <label><b>Repeat Password:</b></label>
-    <input type="password" placeholder="Repeat password" name="password_repeat" required>
+    <input type="password" placeholder="Repeat password" name="password_repeat" required class="form-control">
+  </div>
 
-    <button type="submit">Register</button>
+    <button type="submit" class="btn btn-primary">Register</button>
     <!-- Comment out feature for later use, currently do not support this
     <input type="checkbox" checked="checked"> Remember me
     -->
-  </div>
-
 <!-- Comment out feature for later use, currently do not support this 
   <div class="container" style="background-color:#f1f1f1">
     <button type="button" class="cancelbtn">Cancel</button>
@@ -40,5 +38,4 @@
   -->
 
 </form>
-</body>
-</html>
+{% endblock %}

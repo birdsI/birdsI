@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <div class="row">
+    <div class="page-header">
+      <h1>Keyword: <span class="keyword">Touch bar</span></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div style="height: 500px;" id="chart_div"></div>
+    </div>
+    <div class="col-md-6">
+      <div id="curve_chart" style="height: 500px"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+          ['Age', 'Weight'],
+          [ 8,      12],
+          [ 4,      5.5],
+          [ 11,     14],
+          [ 4,      5],
+          [ 3,      3.5],
+          [ 6.5,    7]
+          ]);
+
+      var options = {
+        title: 'Time vs. Tweets comparison',
+        hAxis: {title: 'Time', minValue: 0, maxValue: 15},
+        vAxis: {title: 'Tweets', minValue: 0, maxValue: 15},
+        legend: 'none'
+      };
+
+      var data2 = google.visualization.arrayToDataTable([
+            ['Time', 'Positives', 'Negatives'],
+            ['6',  1000,      400],
+            ['12',  1170,      460],
+            ['18',  660,       1120],
+            ['24',  1030,      540]
+          ]);
+
+          var options2 = {
+            title: 'Positive vs. Negative Tweets',
+            curveType: 'function',
+            hAxis: {title: 'Time (Hours)', minValue: 0, maxValue: 15},
+            vAxis: {title: 'Tweets', minValue: 0, maxValue: 15},
+            legend: { position: 'bottom' }
+          };
+
+          var chart2 = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+          chart2.draw(data2, options2);
+
+      var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+  </script>
+{% endblock %}

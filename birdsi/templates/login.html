@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html>
-    
-<head>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
-</head>
-<body>
-<div class="imgcontainer">
-  <img src="{{ url_for('static', filename='BirdsILogo.png') }}" alt="BirdsILogo" class="avatar">
-</div>
+{% extends "layout.html" %}
+
+{% block body %}
 <h1>Login to BirdsI</h1>
+{% if error %}<p class="text-danger">{{ error }}</p> {% endif %}
 <form action="{{ url_for('login') }}" method="post">
-
-{% if error %}<p>{{ error }}</p> {% endif %}
-  <div class="container">
+  <div class="form-group">        
     <label><b>Email:</b></label>
-    <input type="email" placeholder="Enter email" name="email" required>
+    <input type="email" placeholder="Enter email" name="email" required class="form-control">
+  </div>
 
+  <div class="form-group">
     <label><b>Password:</b></label>
-    <input type="password" placeholder="Enter password" name="password" required>
+    <input type="password" placeholder="Enter password" name="password" required class="form-control">
+  </div>
 
-    <button type="submit">Login</button>
+    <button type="submit" class="btn btn-primary">Login</button>
     <!-- Comment out feature for later use, currently do not support this
     <input type="checkbox" checked="checked"> Remember me
     -->
-  </div>
 
 <!-- Comment out feature for later use, currently do not support this 
   <div class="container" style="background-color:#f1f1f1">
@@ -33,5 +27,4 @@
   -->
 
 </form>
-</body>   
-</html>
+{% endblock %}
