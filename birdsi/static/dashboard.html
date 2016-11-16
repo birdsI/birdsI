@@ -47,22 +47,22 @@
       <div class="container">
       <div class="row">
         <div class="page-header">
-          <h1>Keyword: </h1>
+          <h1> Keyword: </h1> <input type="text" id="query" value="Default"><button onclick="getQuery()"> Submit Query </button>
         </div>
       </div>
       <div class="row">
           <div class="col-md-8">
             <div style="height: 500px;" id="chart_div"></div>
           </div>
-          <div class="col-md-4">
-            test
+          <div class="col-md-8">
+            <div style="height: 500px;" id="pos_neg"></div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="container">
-      
+
 
 <!--
       <hr>
@@ -71,7 +71,7 @@
         <p>© 2016 BirdsI</p>
       </footer>
     </div> <!-- /container -->
-  
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -80,7 +80,7 @@
     <script>window.jQuery || document.write('<script src="../static/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../static/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+  <!--  <script src="../assets/js/ie10-viewport-bug-workaround.js"></script> -->
      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
           <script type="text/javascript">
             google.charts.load('current', {'packages':['corechart']});
@@ -108,7 +108,36 @@
           chart.draw(data, options);
         }
           </script>
-  
-
+      <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(posOrNeg);
+        function posOrNeg(data) {
+          console.log(data)
+          var posConf = data[0]
+          var neutConf = data[1]
+          var negConf = data[2]
+          console.log(posConf)
+          var posData = google.visualization.arrayToDataTable([
+            ['Sentiment', 'Confidence'],
+            ['Positive', posConf ],
+            ['Negative', negConf ],
+            ['Neutral', neutConf ]
+          ]);
+          var options = {
+            title: 'Impression of tweets',
+            pieHole: 0.4
+          };
+          var chart = new google.visualization.PieChart(document.getElementById('pos_neg'));
+          chart.draw(posData, options)
+        }
+        </script>
+        <script type="text/javascript">
+          function getQuery() {
+            var q = document.getElementById("query").value
+            $.post( "/postmethod", {
+              javascript_data: q
+            }, posOrNeg, "json");
+          }
+        </script>
 </body>
 </html>
