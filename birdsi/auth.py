@@ -14,8 +14,8 @@ class UserManager:
 	@staticmethod
 	def valid_email(email, email_repeat):
 		# Checks if emails match and for regex match
-		if email == email_repeat \
-			and re.match("^[a-zA-Z0-9.-]+@[a-zA-Z0-9.]+\\.[a-zA-Z0-9]+$", email):
+		verifyEmail = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
+		if email == email_repeat and verifyEmail != None:
 			return True
 		
 		return False			
@@ -24,12 +24,9 @@ class UserManager:
 	def valid_password(password, password_repeat):
 		# Checks if passwords match, longer than 6 chars, contains uppercase 
 		# and lower case letter, and a number
-		if password == password_repeat:
-			# Commenting out password validation, will work on in second sprint
-			# and len(password) > 6 \
-			# and re.match("[a-z]", password) \
-			# and re.match("[A-Z]", password) \
-			# and re.match("[0-9]", password):
+		verifyPassword = re.match('^(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$', password)
+		print(verifyPassword)
+		if password == password_repeat and verifyPassword != None:
 			return True
 
 		return False 
